@@ -1,0 +1,26 @@
+body{
+    /* background-color: navy; */
+    line-height: 0px;
+}
+
+#track{
+    max-width: 1060px;
+    max-height: 1060px;
+    border: 3px solid black;
+}
+
+
+.cells{
+    width: 100px;
+    height: 100px;
+    background-color: red;
+    margin: 0px;
+    display: inline-block;
+    transition-duration: 0.3s;
+    border: 3px solid black;
+}
+
+.hover{
+    background-color: yellow;
+    transition-duration: 0.3s;
+}
