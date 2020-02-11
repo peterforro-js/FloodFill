@@ -6,4 +6,15 @@ function main(){
     }
 }
 
+function changeColor(){
+    let cells = Array.from(document.querySelectorAll(".cells"));
+    let transitionDelay = 0;
+    cells.forEach(cell =>{
+        cell.style.transitionDelay = transitionDelay + "ms";
+        cell.style.backgroundColor = cell.style.backgroundColor === "navy" ? "green" : "navy";
+        transitionDelay += 100;
+    });
+
+}
+
 main();
