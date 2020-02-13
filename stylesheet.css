@@ -2,19 +2,18 @@ body{
     line-height: 0px;
 }
 
-#track{
-    max-width: 600px;
-    max-height: 600px;
+#canvas{
+    max-width: 700px;
+    max-height: 700px;
     margin-top: 20px;
     border: 1px solid black;
     padding: 0px;
-    transition-duration: 0.3s;
+    /* transition-duration: 0.3s; */
 }
 
 .cells{
-    width: 10px;
-    height: 10px;
-    background-color: red;
+    width: 5px;
+    height: 5px;
     margin: 0px;
     display: inline-block;
     transition-duration: inherit;
