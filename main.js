@@ -92,36 +92,26 @@ function Paint(canvasWidth, canvasHeight){
                 let yPos = Number(event.target.dataset.y);
                 let xPos = Number(event.target.dataset.x);
                 let colorToChange = event.target.style.backgroundColor;
-                this.cellsToChange = [];
-                this.floodFill(yPos, xPos, colorToChange);
-                this.applyColorChanges();
+                let newColor = this.selectedColor.value;
+                this.floodFill(yPos, xPos, colorToChange, newColor);
             });
         }
 
     // Recursive floodFill algorithm
     // @param1: int - Y position
     // @param2: int - X position
-    // @param3: string - The color of the area that we want to fill
+    // @param3: string - The color of the area that we want to fill50
     // Returns: None
-        this.floodFill = (yPos, xPos, colorToChange) =>{
-            if (this.isOutOfRange(yPos, xPos)) return;
-            let cell = this.getCell(yPos, xPos);
-            if (cell.style.backgroundColor !== colorToChange || this.cellsToChange.includes(cell)) return;
-            this.cellsToChange.push(cell);
-            Object.values(this.directions).forEach(dir =>{
-                this.floodFill(yPos + dir[0], xPos + dir[1], colorToChange);
-            });
-        }
-
-    // Applies the color changes after the floodFill algorith
-    // Returns: None
-        this.applyColorChanges = _ =>{
-            cnt = 0;
-            this.cellsToChange.forEach(cell => {
-                cell.style.transitionDuration = "0.3s";    
-                cell.style.transitionDelay = cnt++ * 10 + "ms";
-                cell.style.backgroundColor = this.selectedColor.value;
-            });
+        this.floodFill = (yPos, xPos, colorToChange, newColor) =>{
+            setTimeout(_ =>{
+                if (this.isOutOfRange(yPos, xPos)) return;
+                let cell = this.getCell(yPos, xPos);
+                if (cell.style.backgroundColor !== colorToChange) return;
+                cell.style.backgroundColor = newColor;
+                Object.values(this.directions).forEach(dir =>{
+                    this.floodFill(yPos + dir[0], xPos + dir[1], colorToChange, newColor);
+                });
+            }, 100);
         }
 
     // Initializes the DOM
