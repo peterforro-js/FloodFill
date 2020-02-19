@@ -7,7 +7,8 @@ class Paint {
             this.canvasWidth = canvasWidth;
             this.canvasHeight = canvasHeight;
             this.canvas = document.querySelector("#canvas");
-            this.checkBox = document.querySelector("#fill"); 
+            this.checkBox = document.querySelector("#fill");
+            this.random =  document.querySelector("#random");
             this.selectedColor = document.querySelector("#color");
             this.cellSize = 5 + 2 * 1;
             this.delay = 100;
@@ -37,6 +38,18 @@ class Paint {
             color += letters[Math.floor(Math.random() * 16)];
             }
             return color;
+        }
+
+    // Gets the color that has to be used by the paint object
+    // If the random chechkbox is checked then it returns a random color
+    // else it returns the color selected with the color picker.
+    // Returns: string representation of the color.
+        getPaintColor() {
+            if (this.random.checked){
+                return this.randomColor();
+            } else {
+                return this.selectedColor.value;
+            }
         }
 
     // Sets the initial size of the canvas 
@@ -104,7 +117,7 @@ class Paint {
         initDrawEventHandler() {
             this.canvas.addEventListener("mouseover", event =>{
                 if (this.isMouseDown() && !this.checkBox.checked){
-                    event.target.style.backgroundColor = this.selectedColor.value;
+                    event.target.style.backgroundColor = this.getPaintColor();
                 }
             });
         }
@@ -117,7 +130,7 @@ class Paint {
                 let yPos = Number(event.target.dataset.y);
                 let xPos = Number(event.target.dataset.x);
                 let colorToChange = event.target.style.backgroundColor;
-                let newColor = this.randomColor();
+                let newColor = this.getPaintColor();
                 this.floodFill(yPos, xPos, colorToChange, newColor);
             });
         }
